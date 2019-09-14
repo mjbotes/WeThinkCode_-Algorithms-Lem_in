@@ -12,29 +12,29 @@
 
 #include "../incl/lem_in.h"
 
-t_rooms	*ft_find_room(t_rooms *head, char *name)
+t_rooms	*ft_find_room(t_rooms **head, char *name)
 {
 	t_rooms	*ptr;
 
-	ptr = head;
+	ptr = *head;
 	while(ptr && !ft_strequ(ptr->name,name))
 		ptr = ptr->next;
 	if (ptr == NULL)
 		ft_error_links(name);
-	else
-		return(ptr);
+	return(ptr);
 }
 
-void	ft_add_link(t_rooms **head, char **arr)
+t_rooms	**ft_add_link(t_rooms **head, char **arr)
 {
 	t_rooms *r1;
 	t_rooms	*r2;
 
-	if (arr[0] && arr[1] && !arr[2])
+	if (arr[0] && arr[1] && arr[2] == NULL)
 	{
-		r1 = ft_find_room(*head, arr[0]);
-		r2 = ft_find_room(*head, arr[1]);
-		ft_lstadd(&r1->links, ft_lstnew(r2, sizeof(r2)));
-		ft_lstadd(&r2->links, ft_lstnew(r1, sizeof(r2)));
+		r1 = ft_find_room(head, arr[0]);
+		r2 = ft_find_room(head, arr[1]);
+		ft_lstadd(&(r1->links), ft_lstnew(r2, sizeof(r2)));
+		ft_lstadd(&(r2->links), ft_lstnew(r1, sizeof(r2)));
 	}
+	return (head);
 }

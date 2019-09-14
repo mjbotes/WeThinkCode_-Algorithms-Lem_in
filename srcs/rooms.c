@@ -27,7 +27,6 @@ void	ft_addroom(t_rooms **head,char *name, t_list *links)
 			ptr = ptr->next;
 		ptr->next = new;
 	}
-	ft_putendl(name);
 }
 
 int		ft_room_checker(t_rooms *head, char *name)
@@ -45,7 +44,7 @@ int		ft_room_checker(t_rooms *head, char *name)
 		if (ft_room_checker(head->next, head->name) == 0)
 			return(0);
 	return (1);
-	
+
 }
 
 t_rooms	*ft_new_room(char *name, t_list *links)
@@ -58,7 +57,7 @@ t_rooms	*ft_new_room(char *name, t_list *links)
 	new->start = 0;
 	new->end = 0;
 	new->next = NULL;
-	return(new); 
+	return(new);
 }
 
 void	ft_delete_rooms(t_rooms **head)
@@ -66,7 +65,7 @@ void	ft_delete_rooms(t_rooms **head)
 	if ((*head)->next)
 		ft_delete_rooms(&((*head)->next));
 	ft_strdel(&(*head)->name);
-	ft_lstdel(&(*head)->links, ft_lstdelone);
+	ft_lstdel(&(*head)->links, ft_del_list);
 	*head=NULL;
 }
 

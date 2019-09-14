@@ -30,8 +30,8 @@ t_rooms					*ft_new_room(char *name, t_list *links);
 void					ft_delete_rooms(t_rooms **head);
 void					ft_set_es(t_rooms *head, char *name, char *c);
 
-t_rooms					*ft_find_room(t_rooms *head, char *name);
-void					ft_add_link(t_rooms **head, char **arr);
+t_rooms					*ft_find_room(t_rooms **head, char *name);
+t_rooms					**ft_add_link(t_rooms **head, char **arr);
 
 typedef struct			s_route
 {
@@ -53,12 +53,14 @@ void					ft_route_stepper(t_route **head);
 void					ft_add_route_step(t_route **head,t_route *cur,
 							t_rooms *room);
 
-void					ft_init_links(t_rooms **head,int fd, char *s);
-void					ft_init(int fd, t_rooms **head);
+t_rooms					**ft_init_links(t_rooms **head,int fd, char *s);
+t_rooms					*ft_init(int fd, t_rooms **head);
 
 void					ft_error_links(char *name);
 void					ft_error_start(void);
 
 void					ft_print_routes(t_route *head);
+
+void					ft_del_list(void *c, size_t s);
 
 #endif

@@ -21,8 +21,11 @@ int	main(int ac, char **av)
 
 	fd = 0;
 	head = NULL;
-	ft_init(fd, &head);
+	head = ft_init(fd, &head);
 	ptr = head;
+	while (!ptr->start)
+		ptr = ptr->next;
+	ptr = ptr->links->content;
 	paths = ft_route_finder(head);
 	if (paths)
 		ft_print_routes(paths);

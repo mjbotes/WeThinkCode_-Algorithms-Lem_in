@@ -27,7 +27,7 @@ int		ft_check_routes(t_route *head, t_rooms *room)
 				return (0);
 			ptr = ptr->next;
 		}
-		r_ptr = r_ptr->next;		
+		r_ptr = r_ptr->next;
 	}
 	return (1);
 }
@@ -56,31 +56,26 @@ void	ft_route_stepper(t_route **head)
 	t_rooms	*tmp;
 
 	ptr = *head;
-	ft_putstr("loop");
 	while (ptr)
 	{
 		rooms = ptr->route_t;
 		tmp = (t_rooms *)rooms->content;
 		rooms = tmp->links;
-		if (tmp)
-			ft_putstr("loop");
-		if (!tmp->end)
+		if (tmp->end != 1)
 		{
-			ft_putstr("loop1");
-			while (rooms)
+			while (rooms != NULL)
 			{
 				tmp = (t_rooms *)rooms->content;
-				ft_putstr("loop2");
 				ft_add_route_step(head, ptr, tmp);
 				rooms = rooms->next;
 			}
 			ptr = ptr->next;
-			if (ptr->prev)
+			if (ptr && ptr->prev)
 				ft_delete_route(&ptr->prev);
 		}
 		else
-			ptr = ptr->next;		
-	} 
+			break ;
+	}
 }
 
 void	ft_add_route_step(t_route **head,t_route *cur, t_rooms *room)
@@ -88,12 +83,13 @@ void	ft_add_route_step(t_route **head,t_route *cur, t_rooms *room)
 	t_route	*new;
 	t_list	*l;
 
-	if (ft_check_routes(*head,room))
+	if (ft_check_routes(*head,room) || room->end == 1)
 	{
+		ft_putendl(room->name);
 		new = ft_make_route_dup(cur);
 		ft_route_pushback(head, new);
 		l = ft_lstnew(room, sizeof(room));
 		new->route_t->next = l;
-		new->route_t = l;	
+		new->route_t = l;
 	}
 }

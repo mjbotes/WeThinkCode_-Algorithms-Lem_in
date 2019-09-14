@@ -12,7 +12,7 @@
 
 #include "../incl/lem_in.h"
 
-void	ft_init(int fd, t_rooms **head)
+t_rooms	*ft_init(int fd, t_rooms **head)
 {
 	char	*str;
 	char	**arr;
@@ -35,21 +35,24 @@ void	ft_init(int fd, t_rooms **head)
 			break ;
 		ft_free_her(arr);
 	}
-	ft_init_links(head, fd, str);
+	head = ft_init_links(head, fd, str);
+	return (*head);
 }
 
-void	ft_init_links(t_rooms **head,int fd, char *s)
+t_rooms	**ft_init_links(t_rooms **head,int fd, char *s)
 {
 	char	*str;
 	char	**arr;
+	t_rooms	*r;
 
 	arr = ft_strsplit(s, '-');
-	ft_add_link(head, arr);
+	head = ft_add_link(head, arr);
 	while (get_next_line(fd, &str))
 	{
 		arr = ft_strsplit(str, '-');
-		ft_add_link(head, arr);
+		head = ft_add_link(head, arr);
 		ft_free_her(arr);
 		ft_strdel(&str);
 	}
+	return (head);
 }
