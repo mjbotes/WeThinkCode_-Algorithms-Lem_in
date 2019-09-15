@@ -53,19 +53,31 @@ t_rooms	*ft_new_room(char *name, t_list *links)
 
 	new = malloc(sizeof(t_rooms));
 	new->name = ft_strdup(name);
+	new->no_ants = 0;
 	new->links = links;
 	new->start = 0;
 	new->end = 0;
+	new->used = 0;
 	new->next = NULL;
 	return(new);
 }
 
 void	ft_delete_rooms(t_rooms **head)
 {
+	t_list	*lst;
+	t_list	*next;
+
 	if ((*head)->next)
 		ft_delete_rooms(&((*head)->next));
 	ft_strdel(&(*head)->name);
-	ft_lstdel(&(*head)->links, ft_del_list);
+	lst = (*head)->links;
+	while (lst)
+	{
+		next = lst->next;
+		free(lst);
+		lst = next;
+	}
+	free(*head);
 	*head=NULL;
 }
 
@@ -89,7 +101,4 @@ void	ft_set_es(t_rooms *head, char *name, char *c)
 		ptr = ptr->next;
 	ptr->end = e;
 	ptr->start = s;
-	//if (c)
-	//	ft_strdel(&c);
-	c = NULL;
 }

@@ -24,3 +24,15 @@ void	ft_error_start(void)
 	ft_putendl("Starting room has not been speccified.");
 	exit(0);
 }
+
+void	ft_error_room(void)
+{
+	ft_putendl("Please provide at least 1 starting room and 1 end room");
+	exit(0);
+}
+
+void	ft_error_s_ants(void)
+{
+	ft_putendl("Please specify the number of ants at the start.");
+	exit(0);
+}

@@ -19,7 +19,7 @@ void	ft_print_routes(t_route *head)
 	t_rooms	*r;
 
 	ptr = head;
-	while (ptr)
+	if (ptr)
 	{
 		l = ptr->route_h;
 		while (l)
@@ -28,12 +28,38 @@ void	ft_print_routes(t_route *head)
 			if (l->next && r->name)
 			{
 				ft_putstr(r->name);
-				ft_putstr(" -> ");
+				ft_putstr("  ->  ");
 			}
-			else if (r->name)
+			else
 				ft_putendl(r->name);
 			l = l->next;
 		}
-		ptr = ptr->next;
+	}
+	else
+		return ;
+	ft_print_routes(head->next);
+}
+
+void	ft_print_links(t_rooms *head)
+{
+	t_rooms *room;
+	t_list	*lst;
+	t_rooms	*ptr;
+
+	room = head;
+	while (room)
+	{
+		ft_putendl(room->name);
+		ft_putnbr(room->start);
+		ft_putendl("------");
+		lst = room->links;
+		while (lst)
+		{
+			ptr = lst->content;
+			ft_putendl(ptr->name);
+			lst = lst->next;
+		}
+		room = room->next;
+		ft_putendl("");
 	}
 }

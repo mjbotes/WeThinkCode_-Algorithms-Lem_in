@@ -18,9 +18,11 @@
 typedef struct			s_rooms
 {
 	char				*name;
+	int					no_ants;
 	t_list				*links;
 	int					start;
 	int					end;
+	int					used;
 	struct s_rooms		*next;
 }						t_rooms;
 
@@ -46,6 +48,7 @@ void					ft_route_pushback(t_route **head, t_route *new_r);
 t_route					*ft_make_route_dup(t_route *src);
 t_route					*ft_new_route(t_list *list);
 void					ft_delete_route(t_route **ptr);
+void					ft_delete_routes(t_route **head);
 
 int						ft_check_routes(t_route *head, t_rooms *room);
 t_route					*ft_route_finder(t_rooms *rooms);
@@ -58,9 +61,25 @@ t_rooms					*ft_init(int fd, t_rooms **head);
 
 void					ft_error_links(char *name);
 void					ft_error_start(void);
+void					ft_error_room(void);
+void					ft_error_s_ants(void);
 
 void					ft_print_routes(t_route *head);
+void					ft_print_links(t_rooms *head);
 
 void					ft_del_list(void *c, size_t s);
+void					ft_route_thinner(t_route *head);
+void					ft_set_r_used(t_route *r);
+
+void					ft_init_ants(t_rooms *head, char *ants);
+
+typedef struct			s_env
+{
+	int					p;
+	int					r;
+	int					d;
+}						t_env;
+
+t_env					*ft_init_env(void);
 
 #endif

@@ -26,6 +26,7 @@ void	ft_route_pushback(t_route **head, t_route *new_r)
 		ptr = ptr->next;
 	ptr->next = new_r;
 	new_r->prev = ptr;
+	new_r->next = NULL;
 }
 
 t_route	*ft_make_route_dup(t_route *src)
@@ -67,13 +68,44 @@ t_route	*ft_new_route(t_list *list)
 
 void	ft_delete_route(t_route **ptr)
 {
-	if ((*ptr)->prev && (*ptr)->next)
+	t_list	*lst;
+	t_list	*next;
+
+	if (*ptr && (*ptr)->prev != NULL)
 		(*ptr)->prev->next = (*ptr)->next;
-	if ((*ptr)->next != NULL && (*ptr)->prev)
+	if (*ptr && (*ptr)->next != NULL)
 		(*ptr)->next->prev = (*ptr)->prev;
-	ft_putendl("hi");
-	ft_lstdel(&(*ptr)->route_h, ft_del_list);
+	lst = (*ptr)->route_h;
+	while (lst)
+	{
+		next = lst->next;
+		free(lst);
+		lst = next;
+	}
 	(*ptr)->route_t = NULL;
+	(*ptr)->next = NULL;
 	(*ptr)->size = 0;
-	//ft_memdel((void **)ptr);
+	free(*ptr);
+}
+
+void	ft_delete_routes(t_route **head)
+{
+	t_list	*lst;
+	t_list	*next;
+
+	if (*head)
+	{
+		ft_delete_routes(&(*head)->next);
+		(*head)->next=NULL;
+		//ft_lstdel(&(*head)->route_h, ft_del_list);
+		lst = (*head)->route_h;
+		while (lst)
+		{
+			next = lst->next;
+			free(lst);
+			lst = next;
+		}
+		free(*head);
+		*head = NULL;
+	}
 }

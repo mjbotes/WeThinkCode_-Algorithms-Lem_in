@@ -29,7 +29,7 @@ t_rooms	**ft_add_link(t_rooms **head, char **arr)
 	t_rooms *r1;
 	t_rooms	*r2;
 
-	if (arr[0] && arr[1] && arr[2] == NULL)
+	if (arr[0] != NULL && arr[1] && arr[2] == NULL)
 	{
 		r1 = ft_find_room(head, arr[0]);
 		r2 = ft_find_room(head, arr[1]);

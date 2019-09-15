@@ -41,7 +41,7 @@ t_list	*ft_lstdup(t_list *head)
 	new = NULL;
 	while (ptr)
 	{
-		ft_lstadd(&new, ft_lstnew(ptr->content, ptr->content_size));
+		ft_lstpushback(&new, ft_lstnew(ptr->content, ptr->content_size));
 		ptr = ptr->next;
 	}
 	return (new);
