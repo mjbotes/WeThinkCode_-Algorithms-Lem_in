@@ -1,4 +1,4 @@
-NAME = lem-in
+NAME = lem_in
 DIR = ./srcs/
 LIBRARY_NAME = libft.a
 LIBRARY_DIR = ./incl/libft/
