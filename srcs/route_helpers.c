@@ -6,7 +6,7 @@
 /*   By: mbotes <mbotes@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/14 10:41:02 by mbotes            #+#    #+#             */
-/*   Updated: 2019/09/14 16:11:26 by mbotes           ###   ########.fr       */
+/*   Updated: 2019/09/16 11:17:04 by mbotes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,22 @@ t_route	*ft_route_finder(t_rooms *rooms)
 	return (new);
 }
 
+void	ft_route_stepper_d(t_route **head, t_route **ptr)
+{
+	t_route	*next;
+
+	next = (*ptr)->next;
+	if (*head == *ptr)
+		*head = next;
+	ft_delete_route(ptr);
+	*ptr = next;
+}
+
 void	ft_route_stepper(t_route **head)
 {
 	t_route	*ptr;
 	t_list	*rooms;
 	t_rooms	*tmp;
-	t_route	*next;
 
 	ptr = *head;
 	while (ptr)
@@ -68,23 +78,19 @@ void	ft_route_stepper(t_route **head)
 				ft_add_route_step(head, ptr, tmp);
 				rooms = rooms->next;
 			}
-			next = ptr->next;
-			if (*head == ptr)
-				*head = next;
-			ft_delete_route(&ptr);
-			ptr = next;
+			ft_route_stepper_d(head, &ptr);
 		}
 		else
-			ptr= ptr->next;
+			ptr = ptr->next;
 	}
 }
 
-void	ft_add_route_step(t_route **head,t_route *cur, t_rooms *room)
+void	ft_add_route_step(t_route **head, t_route *cur, t_rooms *room)
 {
 	t_route	*new;
 	t_list	*l;
 
-	if (ft_check_routes(cur,room) || room->end == 1)
+	if (ft_check_routes(cur, room) || room->end == 1)
 	{
 		new = ft_make_route_dup(cur);
 		ft_route_pushback(head, new);

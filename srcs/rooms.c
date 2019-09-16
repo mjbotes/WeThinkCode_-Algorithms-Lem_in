@@ -6,13 +6,13 @@
 /*   By: mbotes <mbotes@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/14 09:35:03 by mbotes            #+#    #+#             */
-/*   Updated: 2019/09/14 14:53:51 by mbotes           ###   ########.fr       */
+/*   Updated: 2019/09/16 09:05:35 by mbotes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incl/lem_in.h"
 
-void	ft_addroom(t_rooms **head,char *name, t_list *links)
+void	ft_addroom(t_rooms **head, char *name, t_list *links)
 {
 	t_rooms	*new;
 	t_rooms	*ptr;
@@ -37,14 +37,13 @@ int		ft_room_checker(t_rooms *head, char *name)
 	while (ptr)
 	{
 		if (ptr->name == name)
-			return(0);
+			return (0);
 		ptr = ptr->next;
 	}
 	if (head->next)
 		if (ft_room_checker(head->next, head->name) == 0)
-			return(0);
+			return (0);
 	return (1);
-
 }
 
 t_rooms	*ft_new_room(char *name, t_list *links)
@@ -59,7 +58,7 @@ t_rooms	*ft_new_room(char *name, t_list *links)
 	new->end = 0;
 	new->used = 0;
 	new->next = NULL;
-	return(new);
+	return (new);
 }
 
 void	ft_delete_rooms(t_rooms **head)
@@ -78,7 +77,7 @@ void	ft_delete_rooms(t_rooms **head)
 		lst = next;
 	}
 	free(*head);
-	*head=NULL;
+	*head = NULL;
 }
 
 void	ft_set_es(t_rooms *head, char *name, char *c)
@@ -97,7 +96,7 @@ void	ft_set_es(t_rooms *head, char *name, char *c)
 		else if (ft_strequ("##end", c))
 			e = 1;
 	}
-	while (ptr && !ft_strequ(ptr->name,name))
+	while (ptr && !ft_strequ(ptr->name, name))
 		ptr = ptr->next;
 	ptr->end = e;
 	ptr->start = s;

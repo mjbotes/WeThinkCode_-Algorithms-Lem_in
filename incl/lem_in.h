@@ -6,7 +6,7 @@
 /*   By: mbotes <mbotes@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/14 09:13:31 by mbotes            #+#    #+#             */
-/*   Updated: 2019/09/14 15:47:02 by mbotes           ###   ########.fr       */
+/*   Updated: 2019/09/16 10:23:58 by mbotes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ typedef struct			s_rooms
 	struct s_rooms		*next;
 }						t_rooms;
 
-void					ft_addroom(t_rooms **head,char *name, t_list *links);
+void					ft_addroom(t_rooms **head, char *name, t_list *links);
 int						ft_room_checker(t_rooms *head, char *name);
 t_rooms					*ft_new_room(char *name, t_list *links);
 void					ft_delete_rooms(t_rooms **head);
@@ -53,11 +53,12 @@ void					ft_delete_routes(t_route **head);
 int						ft_check_routes(t_route *head, t_rooms *room);
 t_route					*ft_route_finder(t_rooms *rooms);
 void					ft_route_stepper(t_route **head);
-void					ft_add_route_step(t_route **head,t_route *cur,
+void					ft_add_route_step(t_route **head, t_route *cur,
 							t_rooms *room);
 
-t_rooms					**ft_init_links(t_rooms **head,int fd, char *s);
+t_rooms					**ft_init_links(t_rooms **head, int fd, char *s);
 t_rooms					*ft_init(int fd, t_rooms **head);
+t_list					**ft_init_arr(int n);
 
 void					ft_error_links(char *name);
 void					ft_error_start(void);
@@ -66,12 +67,18 @@ void					ft_error_s_ants(void);
 
 void					ft_print_routes(t_route *head);
 void					ft_print_links(t_rooms *head);
+void					ft_print_ant(int ant, char *name);
 
 void					ft_del_list(void *c, size_t s);
 void					ft_route_thinner(t_route *head);
 void					ft_set_r_used(t_route *r);
 
 void					ft_init_ants(t_rooms *head, char *ants);
+t_list					**ft_moveant(t_list **arr, int n, t_route *paths);
+t_list					**ft_add_ant_m(t_list **arr, int *loop, t_route *head,
+							int n);
+void					ft_print_ants(t_route *path);
+int						ft_can_ant_m(t_route *path, int ants);
 
 typedef struct			s_env
 {

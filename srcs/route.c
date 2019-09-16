@@ -6,7 +6,7 @@
 /*   By: mbotes <mbotes@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/14 09:33:29 by mbotes            #+#    #+#             */
-/*   Updated: 2019/09/14 15:44:09 by mbotes           ###   ########.fr       */
+/*   Updated: 2019/09/16 08:57:05 by mbotes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ t_route	*ft_make_route_dup(t_route *src)
 	while (ptr && ptr->next)
 		ptr = ptr->next;
 	new->route_t = ptr;
-	return(new);
+	return (new);
 }
 
 t_route	*ft_new_route(t_list *list)
@@ -63,7 +63,7 @@ t_route	*ft_new_route(t_list *list)
 	new->route_t = ptr;
 	new->next = NULL;
 	new->prev = NULL;
-	return(new);
+	return (new);
 }
 
 void	ft_delete_route(t_route **ptr)
@@ -96,8 +96,7 @@ void	ft_delete_routes(t_route **head)
 	if (*head)
 	{
 		ft_delete_routes(&(*head)->next);
-		(*head)->next=NULL;
-		//ft_lstdel(&(*head)->route_h, ft_del_list);
+		(*head)->next = NULL;
 		lst = (*head)->route_h;
 		while (lst)
 		{

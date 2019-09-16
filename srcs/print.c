@@ -6,7 +6,7 @@
 /*   By: mbotes <mbotes@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/14 12:49:02 by mbotes            #+#    #+#             */
-/*   Updated: 2019/09/14 15:31:43 by mbotes           ###   ########.fr       */
+/*   Updated: 2019/09/16 07:53:40 by mbotes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,4 +62,12 @@ void	ft_print_links(t_rooms *head)
 		room = room->next;
 		ft_putendl("");
 	}
+}
+
+void	ft_print_ant(int ant, char *name)
+{
+	ft_putchar('L');
+	ft_putnbr(ant);
+	ft_putchar('-');
+	ft_putstr(name);
 }
