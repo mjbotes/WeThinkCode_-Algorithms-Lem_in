@@ -6,7 +6,7 @@
 /*   By: mbotes <mbotes@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/14 12:49:02 by mbotes            #+#    #+#             */
-/*   Updated: 2019/09/16 07:53:40 by mbotes           ###   ########.fr       */
+/*   Updated: 2019/09/16 15:07:22 by mbotes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,16 @@ void	ft_print_routes(t_route *head)
 	ft_print_routes(head->next);
 }
 
+void	ft_print_r(t_rooms *room)
+{
+	if (room->end)
+		ft_putendl("END");
+	else if (room->start)
+		ft_putendl("START");
+	else
+		ft_putendl("LINK");
+}
+
 void	ft_print_links(t_rooms *head)
 {
 	t_rooms *room;
@@ -49,9 +59,12 @@ void	ft_print_links(t_rooms *head)
 	room = head;
 	while (room)
 	{
+		ft_putstr("Room name: ");
 		ft_putendl(room->name);
-		ft_putnbr(room->start);
-		ft_putendl("------");
+		ft_putendl("------------------");
+		ft_print_r(room);
+		ft_putendl("------------------");
+		ft_putendl("This room links to:");
 		lst = room->links;
 		while (lst)
 		{
@@ -70,4 +83,31 @@ void	ft_print_ant(int ant, char *name)
 	ft_putnbr(ant);
 	ft_putchar('-');
 	ft_putstr(name);
+}
+
+void	ft_print_options(t_env *env, t_route *paths, t_rooms *head)
+{
+	if (env->l || env->d)
+	{
+		ft_putendl("██╗     ██╗███╗   ██╗██╗  ██╗███████╗");
+		ft_putendl("██║     ██║████╗  ██║██║ ██╔╝██╔════╝");
+		ft_putendl("██║     ██║██╔██╗ ██║█████╔╝ ███████╗");
+		ft_putendl("██║     ██║██║╚██╗██║██╔═██╗ ╚════██║");
+		ft_putendl("███████╗██║██║ ╚████║██║  ██╗███████║");
+		ft_putendl("╚══════╝╚═╝╚═╝  ╚═══╝╚═╝  ╚═╝╚══════╝");
+		ft_putendl("=====================================\n");
+		ft_print_links(head);
+	}
+	if (env->r || env->d)
+	{
+		ft_putendl("██████╗  ██████╗ ██╗   ██╗████████╗███████╗███████╗");
+		ft_putendl("██╔══██╗██╔═══██╗██║   ██║╚══██╔══╝██╔════╝██╔════╝");
+		ft_putendl("██████╔╝██║   ██║██║   ██║   ██║   █████╗  ███████╗");
+		ft_putendl("██╔══██╗██║   ██║██║   ██║   ██║   ██╔══╝  ╚════██║");
+		ft_putendl("██║  ██║╚██████╔╝╚██████╔╝   ██║   ███████╗███████║");
+		ft_putendl("╚═╝  ╚═╝ ╚═════╝  ╚═════╝    ╚═╝   ╚══════╝╚══════╝");
+		ft_putendl("===================================================\n");
+		ft_print_routes(paths);
+		ft_putendl("");
+	}
 }

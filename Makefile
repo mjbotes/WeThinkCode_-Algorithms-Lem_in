@@ -1,4 +1,4 @@
-NAME = lem_in
+NAME = lem-in
 DIR = ./srcs/
 LIBRARY_NAME = libft.a
 LIBRARY_DIR = ./incl/libft/
@@ -15,7 +15,8 @@ FUNC =	ants.c\
 		rooms.c\
 		route.c\
 		route_helpers.c\
-		utils.c
+		utils.c\
+		error_checks.c
 FILES = $(addprefix $(DIR), $(FUNC))
 OBJ = $(patsubst %.c, %.o, $(CHECK_FILES))
 OBJECTS = $(CHECK_FILES:.c=.o)

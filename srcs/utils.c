@@ -6,7 +6,7 @@
 /*   By: mbotes <mbotes@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/16 09:02:58 by mbotes            #+#    #+#             */
-/*   Updated: 2019/09/16 11:10:52 by mbotes           ###   ########.fr       */
+/*   Updated: 2019/09/16 14:04:44 by mbotes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,4 +73,28 @@ void	ft_set_r_used(t_route *r)
 			room->used = 1;
 		l = l->next;
 	}
+}
+
+void	ft_putcolor(int i)
+{
+	if (i == 1)
+		ft_putstr("\e[1;32m");
+	else if (i == 2)
+		ft_putstr("\e[1;33m");
+	else if (i == 3)
+		ft_putstr("\e[1;34m");
+	else if (i == 4)
+		ft_putstr("\e[1;35m");
+	else if (i == 5)
+		ft_putstr("\e[1;36m");
+	else if (i == 6)
+		ft_putstr("\e[1;37m");
+	else if (i == 7)
+		ft_putstr("\e[1;38m");
+	else if (i == 8)
+		ft_putstr("\e[1;39m");
+	else if (i == 9)
+		ft_putstr("\e[1;31m");
+	else if (i == 0)
+		ft_putstr("\e[1;30m");
 }

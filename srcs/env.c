@@ -6,7 +6,7 @@
 /*   By: mbotes <mbotes@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/16 09:03:48 by mbotes            #+#    #+#             */
-/*   Updated: 2019/09/16 09:03:51 by mbotes           ###   ########.fr       */
+/*   Updated: 2019/09/16 14:28:26 by mbotes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ t_env	*ft_init_env(void)
 
 	new = malloc(sizeof(t_env));
 	new->d = 0;
-	new->p = 0;
+	new->l = 0;
 	new->r = 0;
+	new->c = 0;
 	return (new);
 }

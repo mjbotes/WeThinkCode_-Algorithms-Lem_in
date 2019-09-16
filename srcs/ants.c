@@ -6,7 +6,7 @@
 /*   By: mbotes <mbotes@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/16 08:55:31 by mbotes            #+#    #+#             */
-/*   Updated: 2019/09/16 11:39:47 by mbotes           ###   ########.fr       */
+/*   Updated: 2019/09/16 15:15:03 by mbotes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 void	ft_init_ants(t_rooms *head, char *ants)
 {
-	t_rooms *ptr;
+	t_rooms		*ptr;
+	long long	n;
 
 	ptr = head;
 	while (ptr && !ptr->start)
@@ -22,12 +23,21 @@ void	ft_init_ants(t_rooms *head, char *ants)
 	if (ptr == NULL)
 		ft_error_start();
 	if (ft_isnumber(ants))
-		ptr->no_ants = ft_atoi(ants);
+	{
+		n = ft_atoi(ants);
+		if (n > 0 && n < 2147483647)
+			ptr->no_ants = n;
+		else
+		{
+			ft_putendl("Number of ants need to be a valid number");
+			exit(0);
+		}
+	}
 	else
 		ft_error_s_ants();
 }
 
-t_list	**ft_moveant(t_list **arr, int n, t_route *head)
+t_list	**ft_moveant(t_list **arr, int n, t_route *head, t_env *env)
 {
 	int		loop;
 	t_rooms	*room;
@@ -45,21 +55,24 @@ t_list	**ft_moveant(t_list **arr, int n, t_route *head)
 		arr[loop] = ptr;
 		room = ptr->content;
 		room->no_ants++;
+		if (env->c)
+			ft_putcolor((loop + 1) % 10);
 		ft_print_ant(loop + 1, room->name);
 		if (arr[loop + 1] || n != 0)
 			ft_putstr(" ");
 	}
-	arr = ft_add_ant_m(arr, &loop, head, n);
+	env->head = head;
+	arr = ft_add_ant_m(arr, &loop, n, env);
 	return (arr);
 }
 
-t_list	**ft_add_ant_m(t_list **arr, int *loop, t_route *head, int n)
+t_list	**ft_add_ant_m(t_list **arr, int *loop, int n, t_env *e)
 {
 	t_route	*paths;
 	int		i;
 	t_rooms	*room;
 
-	paths = head;
+	paths = e->head;
 	i = 0;
 	while (i < n)
 	{
@@ -67,8 +80,10 @@ t_list	**ft_add_ant_m(t_list **arr, int *loop, t_route *head, int n)
 		paths = paths->next;
 		room = arr[*loop]->content;
 		room->no_ants++;
+		if (e->c)
+			ft_putcolor((*loop + 1) % 10);
 		ft_print_ant((*loop) + 1, room->name);
-		room = head->route_h->content;
+		room = e->head->route_h->content;
 		room->no_ants--;
 		if (i != n - 1)
 			ft_putstr(" ");
@@ -78,7 +93,7 @@ t_list	**ft_add_ant_m(t_list **arr, int *loop, t_route *head, int n)
 	return (arr);
 }
 
-void	ft_print_ants(t_route *path)
+void	ft_print_ants(t_route *path, t_env *env)
 {
 	t_list	**arr;
 	t_rooms	*room;
@@ -96,7 +111,7 @@ void	ft_print_ants(t_route *path)
 		room = path->route_h->content;
 		ants = room->no_ants;
 		n = ft_can_ant_m(path, ants);
-		ft_moveant(arr, n, path);
+		ft_moveant(arr, n, path, env);
 		ft_putendl("");
 		room = path->route_t->content;
 	}

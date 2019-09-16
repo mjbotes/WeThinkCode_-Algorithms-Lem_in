@@ -6,7 +6,7 @@
 /*   By: mbotes <mbotes@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/14 09:13:31 by mbotes            #+#    #+#             */
-/*   Updated: 2019/09/16 10:23:58 by mbotes           ###   ########.fr       */
+/*   Updated: 2019/09/16 15:14:05 by mbotes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,26 @@
 # define LEM_IN_H
 
 # include "libft/libft.h"
+
+typedef struct			s_route
+{
+	t_list				*route_h;
+	t_list				*route_t;
+	int					size;
+	struct s_route		*next;
+	struct s_route		*prev;
+}						t_route;
+
+typedef struct			s_env
+{
+	int					l;
+	int					r;
+	int					d;
+	int					c;
+	t_route				*head;
+}						t_env;
+
+t_env					*ft_init_env(void);
 
 typedef struct			s_rooms
 {
@@ -34,15 +54,6 @@ void					ft_set_es(t_rooms *head, char *name, char *c);
 
 t_rooms					*ft_find_room(t_rooms **head, char *name);
 t_rooms					**ft_add_link(t_rooms **head, char **arr);
-
-typedef struct			s_route
-{
-	t_list				*route_h;
-	t_list				*route_t;
-	int					size;
-	struct s_route		*next;
-	struct s_route		*prev;
-}						t_route;
 
 void					ft_route_pushback(t_route **head, t_route *new_r);
 t_route					*ft_make_route_dup(t_route *src);
@@ -68,25 +79,23 @@ void					ft_error_s_ants(void);
 void					ft_print_routes(t_route *head);
 void					ft_print_links(t_rooms *head);
 void					ft_print_ant(int ant, char *name);
+void					ft_print_options(t_env *env, t_route *paths,
+							t_rooms *head);
 
 void					ft_del_list(void *c, size_t s);
 void					ft_route_thinner(t_route *head);
 void					ft_set_r_used(t_route *r);
+void					ft_putcolor(int i);
 
 void					ft_init_ants(t_rooms *head, char *ants);
-t_list					**ft_moveant(t_list **arr, int n, t_route *paths);
-t_list					**ft_add_ant_m(t_list **arr, int *loop, t_route *head,
-							int n);
-void					ft_print_ants(t_route *path);
+t_list					**ft_moveant(t_list **arr, int n, t_route *paths,
+							t_env *env);
+t_list					**ft_add_ant_m(t_list **arr, int *loop,
+							int n, t_env *e);
+void					ft_print_ants(t_route *path, t_env *env);
 int						ft_can_ant_m(t_route *path, int ants);
 
-typedef struct			s_env
-{
-	int					p;
-	int					r;
-	int					d;
-}						t_env;
-
-t_env					*ft_init_env(void);
+void					ft_check_rooms(t_rooms *head);
+void					ft_check_if_ends(t_route *paths);
 
 #endif
