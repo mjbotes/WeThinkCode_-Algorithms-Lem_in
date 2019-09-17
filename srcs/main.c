@@ -6,7 +6,7 @@
 /*   By: mbotes <mbotes@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/14 12:33:48 by mbotes            #+#    #+#             */
-/*   Updated: 2019/09/16 15:25:32 by mbotes           ###   ########.fr       */
+/*   Updated: 2019/09/17 07:28:01 by mbotes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ int		main(int ac, char **av)
 	t_env	*env;
 
 	fd = 0;
+	ft_putstr("\e[1;1H\e[2J");
 	head = NULL;
 	env = ft_option(ac, av, &fd);
 	if (!(get_next_line(fd, &ants) > 0 && ft_isnumber(ants)))
